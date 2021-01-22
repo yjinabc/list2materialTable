@@ -1,0 +1,53 @@
+<h2>My Heroes</h2>
+
+<button *ngIf="!isShowTable" (click)="changeToTable()">
+  chang to material table
+</button>
+
+<button *ngIf="isShowTable" (click)="changeToList()">
+  chang to list
+</button>
+
+<mat-table *ngIf="isShowTable" [dataSource]="dataSource">
+    <!-- Position Column -->
+    <ng-container matColumnDef="id">
+        <mat-header-cell *matHeaderCellDef> No </mat-header-cell>
+        <mat-cell *matCellDef="let element"> {{element.id}} </mat-cell>
+    </ng-container>
+    <!-- Name Column -->
+    <ng-container matColumnDef="name">
+        <mat-header-cell *matHeaderCellDef> Name </mat-header-cell>
+        <mat-cell *matCellDef="let element"> {{element.name}} </mat-cell>
+    </ng-container>
+    <ng-container matColumnDef="actions">
+        <mat-header-cell *matHeaderCellDef>Actions</mat-header-cell>
+        <mat-cell *matCellDef="let hero">
+            <button (click)="detailHero(hero.id)" mat-icon-button color="primary" matTooltip="show plan detail">
+        <mat-icon>description</mat-icon>
+      </button>
+            <button mat-icon-button color="warn" matTooltip="Delete plan" type="button" (click)="notdelete(hero)">
+        <mat-icon>delete</mat-icon>
+      </button>
+        </mat-cell>
+    </ng-container>
+    <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+    <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+</mat-table>
+
+<mat-paginator *ngIf="isShowTable" [pageSizeOptions]="[5, 10]" showFirstLastButtons></mat-paginator>
+<ul *ngIf="!isShowTable" class="heroes">
+    <li *ngFor="let hero of heroes">
+        <a routerLink="/detail/{{hero.id}}">
+            <span class="badge">{{hero.id}}</span> {{hero.name}}
+        </a>
+        <button class="delete" title="delete hero" (click)="delete(hero)">x</button>
+    </li>
+</ul>
+<div *ngIf="!isShowTable">
+    <label>Hero name:
+    <input #heroName />
+  </label>
+    <button (click)="add(heroName.value); heroName.value=''">
+    add
+  </button>
+</div>
