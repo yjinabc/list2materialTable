@@ -2,6 +2,10 @@
 
 https://yjinabc.github.io/ng11Demo
 This demo is based on https://angular.io/tutorial, used to demonstrate how to switch between hero list and material hero table. 
+
+https://yjinabc.github.io/ng11Echarts/
+This demo used to demonstrate how to uss Apache ECharts in angular 11.
+
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 11.0.7.
 
 ## Development server
